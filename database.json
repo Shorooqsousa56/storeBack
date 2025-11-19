@@ -1,0 +1,22 @@
+{
+  "dev": {
+    "driver": "pg",
+    "host": "localhost",
+    "database": "store_front_db",
+    "user": "shorooq",
+    "password": "shorooq",
+    "port": 5433
+  
+  },
+
+   "test": {
+    "driver": "pg",
+    "host": "localhost",
+    "database": "store_front_test",
+    "user": "shorooq",
+    "password": "shorooq",
+    "port": 5433
+  }
+
+}
+
