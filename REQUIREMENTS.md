@@ -43,7 +43,7 @@
 
 ---
 
-## 2️⃣ API Routes
+## API Routes
 
 ### Users
 
