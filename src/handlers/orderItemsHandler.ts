@@ -101,7 +101,7 @@ export class OrderItemsHandler{
                                                  if (!orderItems)
                                                  return res.status(404).json({ message: 'order item not found' });
                                    
-                                                res.status(200).json(orderItems);
+                                               return res.status(200).json(orderItems);
                                                 
                                            } catch(err:unknown){
                                                errorHandler(err,res);

@@ -78,26 +78,7 @@ async createProduct (req:Request,res:Response){
         
             }
 
-            async deleteProduct(req:Request,res:Response){
-                try{
-                    const id=parseInt(req.params.id);
-                     if (isNaN(id)) {
-              return res.status(400).json({ message: 'id is required' });
-            }
-                    
-        
-                     const product=await productRep.delete(id);
-                      if (!product)
-                      return res.status(404).json({ message: 'product not found' });
-        
-                     res.status(200).json({ message: 'Product deleted successfully', deleted: product });
-                     
-                } catch(err:unknown){
-                     errorHandler(err,res);
-        
-                }
-        
-            }
+          
 
              async searchProducts(req:Request,res:Response){
             

@@ -17,6 +17,7 @@ describe("OrderItemsRepository",()=>{
     let  userId :number;
     let  orderId :number;
     let  productId :number;
+    let productId2:number;
 
    beforeAll(async()=>{
     await pool.query(`delete from order_items`);
@@ -47,6 +48,13 @@ describe("OrderItemsRepository",()=>{
       RETURNING id
     `);
     productId = product.rows[0].id;
+
+    const newProduct = await pool.query(`
+    INSERT INTO products (name, description, price, stock_balance, picture)
+    VALUES ('Product B', 'Another description', 90, 5, 'picB.jpg')
+    RETURNING id
+  `);
+    productId2 = newProduct.rows[0].id;
 
    })
 
@@ -112,6 +120,49 @@ describe("OrderItemsRepository",()=>{
 
 
   });
+
+   //testing get all
+   it("should return all order items",async ()=>{
+    testItem.order_id = orderId;
+    testItem.product_id = productId;
+
+     
+    await orderItemRep.create(testItem);
+    await orderItemRep.create( {
+      "order_id": orderId,
+      "product_id": productId2,
+      "quantity": 3,
+      "price": 50
+});
+
+     const items=await orderItemRep.getAll();
+     expect(items.length).toBe(2);
+
+  });
+
+  //testing get by id
+   it("should return order item by id",async ()=>{
+     testItem.order_id = orderId;
+    testItem.product_id = productId;
+
+    const item=await orderItemRep.create(testItem);
+     const result=await orderItemRep.getById(item.id!);
+   expect(result!.id).toBe(item.id);
+
+  });
+  //testing get by  order id
+   it("should return order item by order id",async ()=>{
+     testItem.order_id = orderId;
+    testItem.product_id = productId;
+
+   await orderItemRep.create(testItem);
+     const items=await orderItemRep.getByOrder(orderId);
+        expect(items.length).toBe(1);
+
+
+  });
+
+
 
 
   

@@ -11,5 +11,4 @@ productRoute.get('/',authorization(["admin","customer"]),producthandler.getAllPr
 productRoute.get('/search',authorization(["admin","customer"]),producthandler.searchProducts);
 productRoute.get('/:id',authorization(["admin","customer"]),producthandler.getAllProductById);
 productRoute.patch('/:id',authorization(["admin"]),producthandler.updateProduct);
-productRoute.delete('/:id',authorization(["admin"]),producthandler.deleteProduct);
 

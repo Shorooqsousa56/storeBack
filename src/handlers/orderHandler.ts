@@ -88,7 +88,7 @@ export class OrderHandler{
                                              if (!order)
                                              return res.status(404).json({ message: 'order not found' });
                                
-                                            res.status(200).json({ message: 'order cancelled successfully', cancelled: order });
+                                           return res.status(200).json({ message: 'order cancelled successfully', cancelled: order });
                                             
                                        } catch(err:unknown){
                                             errorHandler(err,res);

@@ -77,6 +77,39 @@ describe("orderRepository",()=>{
 
   });
 
+   //testing get all
+   it("should return all orders",async ()=>{
+    testOrder.user_id = userId;
+
+    await orderRep.create(testOrder);
+    await orderRep.create(testOrder);
+
+     const orders=await orderRep.getAll();
+     expect(orders.length).toBe(2);
+
+  });
+
+  //testing get by id
+   it("should return order by id",async ()=>{
+    testOrder.user_id = userId;
+
+    const order=await orderRep.create(testOrder);
+     const result=await orderRep.getById(order.id!);
+   expect(result!.id).toBe(order.id);
+
+  });
+
+   //testing search
+   it("should search order by status or created or price",async ()=>{
+    testOrder.user_id = userId;
+
+    await orderRep.create(testOrder);
+     const result=await orderRep.search("pending");
+   expect(result.length).toBeGreaterThan(0);
+
+  });
+
+  
 
 
 

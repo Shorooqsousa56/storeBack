@@ -12,6 +12,7 @@ describe("OrderItemsRepository", () => {
     let userId;
     let orderId;
     let productId;
+    let productId2;
     beforeAll(async () => {
         await db_1.pool.query(`delete from order_items`);
         await db_1.pool.query(`delete from orders`);
@@ -35,6 +36,12 @@ describe("OrderItemsRepository", () => {
       RETURNING id
     `);
         productId = product.rows[0].id;
+        const newProduct = await db_1.pool.query(`
+    INSERT INTO products (name, description, price, stock_balance, picture)
+    VALUES ('Product B', 'Another description', 90, 5, 'picB.jpg')
+    RETURNING id
+  `);
+        productId2 = newProduct.rows[0].id;
     });
     beforeEach(async () => {
         await db_1.pool.query(`delete from order_items`);
@@ -75,5 +82,35 @@ describe("OrderItemsRepository", () => {
         const updateItem = await orderItemRep.update(item.id, { quantity: 5, price: 200 });
         expect(updateItem.quantity).toBe(5);
         expect(Number(updateItem.price)).toBe(200);
+    });
+    //testing get all
+    it("should return all order items", async () => {
+        testItem.order_id = orderId;
+        testItem.product_id = productId;
+        await orderItemRep.create(testItem);
+        await orderItemRep.create({
+            "order_id": orderId,
+            "product_id": productId2,
+            "quantity": 3,
+            "price": 50
+        });
+        const items = await orderItemRep.getAll();
+        expect(items.length).toBe(2);
+    });
+    //testing get by id
+    it("should return order item by id", async () => {
+        testItem.order_id = orderId;
+        testItem.product_id = productId;
+        const item = await orderItemRep.create(testItem);
+        const result = await orderItemRep.getById(item.id);
+        expect(result.id).toBe(item.id);
+    });
+    //testing get by  order id
+    it("should return order item by order id", async () => {
+        testItem.order_id = orderId;
+        testItem.product_id = productId;
+        await orderItemRep.create(testItem);
+        const items = await orderItemRep.getByOrder(orderId);
+        expect(items.length).toBe(1);
     });
 });

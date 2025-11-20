@@ -44,12 +44,7 @@ export class ProductRepository{
     
       }
     
-      async delete(id:number):Promise<Product |null>{
-       const query =`delete from products where id =$1 returning *`;
-        const result=await pool.query(query,[id]);
-        return result.rows[0]||null;
-
-      }
+     
        async search(search:string):Promise<Product[]>{
           const query=`select * from products where name ilike $1 or description ilike $1  order by id asc`;
           const result=await pool.query(query,[`%${search}%`]);

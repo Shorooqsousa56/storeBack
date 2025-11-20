@@ -33,11 +33,6 @@ class ProductRepository {
         const result = await db_1.pool.query(query, [name, description, price, stock_balance, picture, id]);
         return result.rows[0] || null;
     }
-    async delete(id) {
-        const query = `delete from products where id =$1 returning *`;
-        const result = await db_1.pool.query(query, [id]);
-        return result.rows[0] || null;
-    }
     async search(search) {
         const query = `select * from products where name ilike $1 or description ilike $1  order by id asc`;
         const result = await db_1.pool.query(query, [`%${search}%`]);

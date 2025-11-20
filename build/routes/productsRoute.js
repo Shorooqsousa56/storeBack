@@ -14,4 +14,3 @@ exports.productRoute.get('/', (0, authMiddleware_1.authorization)(["admin", "cus
 exports.productRoute.get('/search', (0, authMiddleware_1.authorization)(["admin", "customer"]), producthandler.searchProducts);
 exports.productRoute.get('/:id', (0, authMiddleware_1.authorization)(["admin", "customer"]), producthandler.getAllProductById);
 exports.productRoute.patch('/:id', (0, authMiddleware_1.authorization)(["admin"]), producthandler.updateProduct);
-exports.productRoute.delete('/:id', (0, authMiddleware_1.authorization)(["admin"]), producthandler.deleteProduct);

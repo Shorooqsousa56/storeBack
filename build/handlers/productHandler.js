@@ -56,21 +56,6 @@ class ProductHandler {
             (0, errorHandler_1.errorHandler)(err, res);
         }
     }
-    async deleteProduct(req, res) {
-        try {
-            const id = parseInt(req.params.id);
-            if (isNaN(id)) {
-                return res.status(400).json({ message: 'id is required' });
-            }
-            const product = await productRep.delete(id);
-            if (!product)
-                return res.status(404).json({ message: 'product not found' });
-            res.status(200).json({ message: 'Product deleted successfully', deleted: product });
-        }
-        catch (err) {
-            (0, errorHandler_1.errorHandler)(err, res);
-        }
-    }
     async searchProducts(req, res) {
         try {
             const search = req.query.q;

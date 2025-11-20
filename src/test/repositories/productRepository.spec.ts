@@ -44,15 +44,33 @@ describe("productRepository",()=>{
 
   });
 
-  //testing delete
-   it("should delete product",async ()=>{
-   const product=await productRep.create(testProduct);
-   const deleteUser=await productRep.delete(product.id!);
-   const afterDeleteUser=await productRep.getById(product.id!);
-   expect(afterDeleteUser).toBeNull();
+  
+
+  //testing get all
+   it("should return all products",async ()=>{
+    await productRep.create(testProduct);
+    await productRep.create({...testProduct,name:"desk",price:200});
+
+     const products=await productRep.getAll();
+     expect(products.length).toBe(2);
 
   });
 
+  //testing get by id
+   it("should return product by id",async ()=>{
+    const product=await productRep.create(testProduct);
+     const result=await productRep.getById(product.id!);
+   expect(result!.id).toBe(product.id);
+
+  });
+
+   //testing search
+   it("should search product by name or description",async ()=>{
+    await productRep.create(testProduct);
+     const result=await productRep.search("lap");
+   expect(result.length).toBeGreaterThan(0);
+
+  });
 
   
 

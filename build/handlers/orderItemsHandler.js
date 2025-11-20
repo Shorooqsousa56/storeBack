@@ -76,7 +76,7 @@ class OrderItemsHandler {
             const orderItems = await orderItemsRep.update(id, req.body);
             if (!orderItems)
                 return res.status(404).json({ message: 'order item not found' });
-            res.status(200).json(orderItems);
+            return res.status(200).json(orderItems);
         }
         catch (err) {
             (0, errorHandler_1.errorHandler)(err, res);
