@@ -70,7 +70,6 @@
 | GET    | `/products/:id`    | Get product by ID  | Both   |
 | GET    | `/products/search` | Search products    | Both   |
 | PATCH  | `/products/:id`    | Update product     | Admin  |
-| DELETE | `/products/:id`    | Delete product     | Admin  |
 
 ### Orders
 
