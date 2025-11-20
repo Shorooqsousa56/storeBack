@@ -13,6 +13,56 @@ git clone https://github.com/Shorooqsousa56/storeBack.git
 
 npm install
 
+# Dependencies
+
+bcrypt ^6.0.0
+
+body-parser ^1.20.3
+
+db-migrate ^0.11.14
+
+db-migrate-pg ^1.5.2
+
+dotenv ^17.2.3
+
+express ^4.21.2
+
+jsonwebtoken ^9.0.2
+
+pg ^8.16.3
+
+typescript ^4.9.5
+
+# Dev Dependencies
+
+@types/bcrypt ^6.0.0
+
+@types/express ^4.17.24
+
+@types/jasmine ^3.10.18
+
+@types/jsonwebtoken ^9.0.10
+
+@types/pg ^7.14.11
+
+cross-env ^10.1.0
+
+dotenv-cli ^11.0.0
+
+jasmine ^3.99.0
+
+jasmine-spec-reporter ^6.0.0
+
+jasmine-ts ^0.3.3
+
+ts-node ^9.1.1
+
+tsc-watch ^4.6.2
+
+supertest: ^7.1.4
+
+@types/supertest: ^6.0.3
+
 # 3- Setup environment variables
 
 create .env file
